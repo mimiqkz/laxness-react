@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import { AppRegistry, Text, View } from 'react-native';
 
-export default class myapp extends Component {
+import Component from 'app/components/Component/Component'
+
+
+export default class component extends Component {
   render() {
     return (
       <View>
-        <Text>Hello world!</Text>
+        <Component/>
       </View>
     )  
   }
