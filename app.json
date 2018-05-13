@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
   "expo": {
     "name": "laxness-react",
     "description": "This project is really great.",
@@ -25,3 +26,8 @@
     }
   }
 }
+=======
+  "name": "laxnessreact",
+  "displayName": "laxnessreact"
+}
+>>>>>>> 7cc6591e84dac5dbcb8164aaa3e5f5fc64821694

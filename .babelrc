@@ -1,8 +1,12 @@
 {
+<<<<<<< HEAD
   "presets": ["babel-preset-expo"],
   "env": {
     "development": {
       "plugins": ["transform-react-jsx-source"]
     }
   }
+=======
+  "presets": ["react-native"]
+>>>>>>> 7cc6591e84dac5dbcb8164aaa3e5f5fc64821694
 }

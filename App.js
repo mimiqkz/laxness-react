@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
@@ -19,3 +20,20 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
+=======
+import React, { Component } from 'react';
+import { AppRegistry, Text, View } from 'react-native';
+
+export default class myapp extends Component {
+  render() {
+    return (
+      <View>
+        <Text>Hello world!</Text>
+      </View>
+    )  
+  }
+
+}
+
+AppRegistry.registerComponent('myapp', () => myapp);
+>>>>>>> 7cc6591e84dac5dbcb8164aaa3e5f5fc64821694
