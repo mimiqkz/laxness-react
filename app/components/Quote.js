@@ -1,5 +1,6 @@
 import React from 'react';
-import { StyleSheet, Text, View, NetInfo } from 'react-native';
+import { StyleSheet, Text, View, NetInfo, Button } from 'react-native';
+import { snapViewAsync } from './Share' 
 
 export default class Quote extends React.Component {
 
@@ -39,6 +40,13 @@ export default class Quote extends React.Component {
       });
 
   }
+  shareButton = async () => {
+    console.info('pressing the share button')
+    console.info(this.View)
+    //const pic = await snapViewAsync(this.View)
+    //console.info(pic)
+    //tackeScreenShoot();
+  }
   componentWillMount() {
     NetInfo.isConnected.fetch()
       .then((isConnected) => {
@@ -73,6 +81,11 @@ export default class Quote extends React.Component {
         <Text>{book}</Text>
         <Text>{quote}</Text>
         <Text>{year}</Text>
+        <Button  
+          onPress={this.shareButton}
+          title="Deila"
+          color="#841584"
+          accessibilityLabel="Share the qoute with your frends"/>
       </View>
     )
   }
