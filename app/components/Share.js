@@ -1,14 +1,15 @@
-import { Share, Dimensions, PixelRatio } from "react-native";
-import { takeSnapshotAsync, FileSystem } from 'expo';
+import React from 'react';
+import { Share, Dimensions, PixelRatio, Button } from "react-native";
+import { takeSnapshotAsync, FileSystem, Permissions } from 'expo';
 
-export default class Share extends React.Component {
+export default class share extends React.Component {
     state = {
         result: null,
     }
 
     shareImage() {
         //Do the share image thing here
-
+        console.info('test');
     }
 
     async takeScreenShot() {
@@ -28,14 +29,19 @@ export default class Share extends React.Component {
         this.setState({result});
     }
 
-    componentWillMount() {
-        this.takeScreenShot();
+    async componentWillMount() {
+        // this.takeScreenShot();
+        const { status } = await Permissions.askAsync(Permissions.CAMERA);
+        this.setState({ hasCameraPermission: status === 'granted', loading: true });
     }
 
     render() {
         return (
             //Use the functionality here m8
-            <Button/>
+            <Button
+                onPress={this.shareImage}
+                title="Deila með öðrum"
+            />
         )
     }
 }
