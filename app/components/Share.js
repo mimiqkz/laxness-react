@@ -5,6 +5,9 @@ import { takeSnapshotAsync, FileSystem, Permissions } from 'expo';
 export default class share extends React.Component {
     state = {
         result: null,
+        tokenId: null,
+        snapshot: null,
+        hasCameraPermission: null,
     }
 
     shareImage() {
@@ -28,6 +31,18 @@ export default class share extends React.Component {
         
         this.setState({result});
     }
+    async capture() {
+
+    
+        const snapshot = await Expo.takeSnapshotAsync(this.image, {
+          format: 'jpg',
+          quality: 1,
+          result: 'file',
+          width: 402,
+          height: 402
+        });
+        console.log('whoa dude: ', snapshot);
+      }
 
     async componentWillMount() {
         // this.takeScreenShot();
@@ -38,9 +53,11 @@ export default class share extends React.Component {
     render() {
         return (
             //Use the functionality here m8
+
             <Button
-                onPress={this.shareImage}
+                onPress={this.capture.bind(this)}
                 title="Deila með öðrum"
+                ref={ref => { this.image = ref; }}
             />
         )
     }
@@ -63,7 +80,7 @@ export default class share extends React.Component {
 //     console.info(result)
 // }
 
-// export function ShareImage(base64Data){
+//  function ShareImage(base64Data){
 //     let options = {
 //         url: `data:image/png;base64,` + base64Data,
 //         type: 'image/png',
