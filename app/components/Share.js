@@ -1,5 +1,5 @@
 import React from 'react';
-import { Share, Dimensions, PixelRatio, Button } from "react-native";
+import { Share, Dimensions, PixelRatio, Button, CameraRoll } from "react-native";
 import { takeSnapshotAsync, FileSystem, Permissions } from 'expo';
 
 export default class share extends React.Component {
@@ -7,15 +7,17 @@ export default class share extends React.Component {
         result: null,
         tokenId: null,
         snapshot: null,
+        CameraRoll: null,
         hasCameraPermission: null,
+        hasCameraRolePermission:  null,
     }
 
     shareImage() {
-        const base64Data = this.state.snapshot;
+        const base64Data = this.state.CameraRoll;
         Share.share({
             message: 'deildu með öðrum',
-            url: `data:image/png;base64,` + base64Data,
-            type: 'image/png',
+            url: `data:image/jpg;base64,` + base64Data,
+            type: 'image/jpg',
             title: '',
             }, {
             // Android only:
@@ -32,19 +34,23 @@ export default class share extends React.Component {
         const snapshot = await Expo.takeSnapshotAsync(this.image, {
           format: 'jpg',
           quality: 1,
-          result: 'base64',
+          result: 'file',
           width: 402,
           height: 402
         });
         this.setState({snapshot: snapshot});
+        let saveResult = await CameraRoll.saveToCameraRoll(snapshot, 'photo');
+        this.setState({CameraRoll: saveResult});
         // console.log('whoa dude: ', snapshot);
         this.shareImage(this.snapshot);
       }
 
     async componentWillMount() {
         // this.takeScreenShot();
-        const { status } = await Permissions.askAsync(Permissions.CAMERA);
+        let { status } = await Permissions.askAsync(Permissions.CAMERA);
         this.setState({ hasCameraPermission: status === 'granted', loading: true });
+        status = await Permissions.askAsync(Permissions.CAMERA_ROLL).status;
+        this.setState({ hasCameraRolePermission: status === 'granted', loading: true });
     }
 
     render() {
@@ -59,9 +65,3 @@ export default class share extends React.Component {
         )
     }
 }
-
-
-//  function ShareImage(base64Data){
-//     
-
-// }
