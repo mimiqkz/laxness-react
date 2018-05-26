@@ -5,14 +5,14 @@ import Expo, {Permissions,Notifications,Constants} from 'expo';
 
 export default class Notification extends React.Component {
 
-async function getNotificationPermission() {
-   const { status } = await Permissions.getAsync(
-     Permissions.NOTIFICATIONS
-   );
-   if (status !== 'granted') {
-     await Permissions.askAsync(Permissions.NOTIFICATIONS);
-   }
- }
+  async function getNotificationPermission() {
+    const { status } = await Permissions.getAsync(
+      Permissions.NOTIFICATIONS
+    );
+    if (status !== 'granted') {
+      await Permissions.askAsync(Permissions.NOTIFICATIONS);
+    }
+  }
 
 const localNotification = {
       title: 'Halli segir Hæ',
