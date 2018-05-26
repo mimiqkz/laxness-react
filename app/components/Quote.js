@@ -1,5 +1,6 @@
 import React from 'react';
-import { StyleSheet, Text, View, NetInfo } from 'react-native';
+import { StyleSheet, Text, View, NetInfo, Button } from 'react-native';
+import Share from './Share' ;
 
 export default class Quote extends React.Component {
 
@@ -39,6 +40,7 @@ export default class Quote extends React.Component {
       });
 
   }
+
   componentWillMount() {
     NetInfo.isConnected.fetch()
       .then((isConnected) => {
@@ -73,6 +75,7 @@ export default class Quote extends React.Component {
         <Text>{book}</Text>
         <Text>{quote}</Text>
         <Text>{year}</Text>
+        <Share/>
       </View>
     )
   }
