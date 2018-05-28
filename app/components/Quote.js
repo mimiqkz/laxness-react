@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View, NetInfo } from 'react-native';
+import QuoteBox from './QuoteBox';
 
 export default class Quote extends React.Component {
 
@@ -45,7 +46,7 @@ export default class Quote extends React.Component {
         if(isConnected) {
           this.getQuote();
         }else {
-          this.setState({status: isConnected});
+          this.setState({ status: isConnected });
         }
       })
       .catch(err => console.error(err));
@@ -53,14 +54,14 @@ export default class Quote extends React.Component {
   }
 
   render() {
-    const { chapter, book, quote, year } = {...this.state.data};
-
-    if(!this.state.status) {
-      return (<Text>Vinsamlegast athugaðu netsamband</Text>)
-    }
+    const { chapter, book, quote, year } = { ...this.state.data };
 
     if (this.state.loading) {
       return (<Text>Sæki gögn...</Text>);
+    }
+
+    if(!this.state.status) {
+      return (<Text>Vinsamlegast athugaðu netsamband</Text>)
     }
 
     if (this.state.error) {
