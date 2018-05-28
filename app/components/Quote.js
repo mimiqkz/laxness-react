@@ -1,9 +1,12 @@
 import React from 'react';
-import { StyleSheet, Text, View, NetInfo } from 'react-native';
-import QuoteBox from './QuoteBox';
+import { StyleSheet, Text, View, NetInfo, Button } from 'react-native';
+import Share from './Share' ;
 
 export default class Quote extends React.Component {
-
+  constructor(){
+    super();
+    NetInfo.addEventListener('connectionChange', this.handleConnectivityChange.bind(this));
+  }
   state = {
     status: true,
     data: null,
@@ -12,6 +15,7 @@ export default class Quote extends React.Component {
     error: false,
   }
 
+  
   convertError(errorCode) {
     const msg = {
       500: 'Internal Server Error',
@@ -20,6 +24,11 @@ export default class Quote extends React.Component {
       504: 'Gateway Timeout',
     }
     return msg[errorCode];
+  }
+
+  handleConnectivityChange() {
+    NetInfo.isConnected.removeEventListener('connectionChange', this.handleConnectivityChange);
+    this.setState({ status: true });
   }
 
   getQuote() {
@@ -40,9 +49,11 @@ export default class Quote extends React.Component {
       });
 
   }
-  componentWillMount() {
+
+  componentDidMount() {
     NetInfo.isConnected.fetch()
       .then((isConnected) => {
+      
         if(isConnected) {
           this.getQuote();
         }else {
@@ -56,12 +67,12 @@ export default class Quote extends React.Component {
   render() {
     const { chapter, book, quote, year } = { ...this.state.data };
 
-    if (this.state.loading) {
-      return (<Text>Sæki gögn...</Text>);
-    }
-
     if(!this.state.status) {
       return (<Text>Vinsamlegast athugaðu netsamband</Text>)
+    }
+
+    if (this.state.loading) {
+      return (<Text>Sæki gögn...</Text>);
     }
 
     if (this.state.error) {
@@ -74,6 +85,7 @@ export default class Quote extends React.Component {
         <Text>{book}</Text>
         <Text>{quote}</Text>
         <Text>{year}</Text>
+        <Share/>
       </View>
     )
   }
