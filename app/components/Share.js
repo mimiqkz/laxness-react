@@ -8,50 +8,52 @@ export default class share extends React.Component {
         result: null,
         snapshot: null,
         open: false,
-        CameraRoll: null,
         hasCameraPermission: null,
-        hasCameraRolePermission:  null,
     }
 
     async shareImage() {
         const imageURL = this.state.snapshot;
-        console.log('here')
-        const response = await fetch('http://127.0.0.1:3000/api/img/', {
+        console.log(imageURL)
+        const response = await fetch('http://laxnessapi.herokuapp.com/api/img/', {
             method: 'POST',
             headers: {
-              'Accept': 'application/json',
-              'Content-Type': 'application/json',
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
             },
             body: JSON.stringify({
               base64: imageURL,
-              id: 1,
             })
-            })
+        })
         console.log(response);
-        
+        const responseJson = await response.json();
+
+        const content = {
+            message: responseJson.link,
+            title: 'tile share',
+            url: responseJson.link,
+          };
+          const option = { dialogTitle: 'title title title' };
+          Share.share(content, option);
     }
 
     async capture() {
         const snapshot = await Expo.takeSnapshotAsync(this.image, {
           format: 'png',
-          quality: 1,
+          quality: 0.9,
           result: 'base64',
-          width: 402,
-          height: 402
+          width: 20,
+          height: 40
         });
-        this.setState({snapshot: snapshot});
-        // let saveResult = await CameraRoll.saveToCameraRoll(snapshot, 'photo');
-        //this.setState({CameraRoll: saveResult});
+        this.setState({snapshot: `data:image/png;base64,${snapshot}`});
         // console.log('whoa dude: ', snapshot);
         this.shareImage(this.snapshot);
       }
 
     async componentWillMount() {
         // this.takeScreenShot();
-        let { status } = await Permissions.askAsync(Permissions.CAMERA);
+        const { status } = await Permissions.askAsync(Permissions.CAMERA);
         this.setState({ hasCameraPermission: status === 'granted', loading: true });
-        status = await Permissions.askAsync(Permissions.CAMERA_ROLL).status;
-        this.setState({ hasCameraRolePermission: status === 'granted', loading: true });
+        
     }
     onShare = () => {
         const content = {
