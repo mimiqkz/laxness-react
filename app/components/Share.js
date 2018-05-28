@@ -1,7 +1,7 @@
 import React from 'react';
-import { Dimensions, PixelRatio, CameraRoll, Button, Linking } from "react-native";
+import { Dimensions, PixelRatio, CameraRoll, Button, Linking, Share } from "react-native";
 import { takeSnapshotAsync, FileSystem, Permissions } from 'expo';
-import Share, {ShareSheet} from 'react-native-share';
+
 
 export default class share extends React.Component {
     state = {
@@ -13,15 +13,21 @@ export default class share extends React.Component {
         hasCameraRolePermission:  null,
     }
 
-    shareImage() {
-        const imageURL = this.state.CameraRoll;
-        let instagramURL = `instagram://library?AssetPath=${imageURL}`;
-        console.info(imageURL.edges);
-        // this is commented out for Android works on ios
-        //Linking.openURL(instagramURL);
-        Linking.openURL(
-            `https://www.facebook.com/sharer/${imageURL}`,
-          );
+    async shareImage() {
+        const imageURL = this.state.snapshot;
+        console.log('here')
+        const response = await fetch('http://127.0.0.1:3000/api/img/', {
+            method: 'POST',
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              base64: imageURL,
+              id: 1,
+            })
+            })
+        console.log(response);
         
     }
 
@@ -29,13 +35,13 @@ export default class share extends React.Component {
         const snapshot = await Expo.takeSnapshotAsync(this.image, {
           format: 'png',
           quality: 1,
-          result: 'file',
+          result: 'base64',
           width: 402,
           height: 402
         });
         this.setState({snapshot: snapshot});
-        let saveResult = await CameraRoll.saveToCameraRoll(snapshot, 'photo');
-        this.setState({CameraRoll: saveResult});
+        // let saveResult = await CameraRoll.saveToCameraRoll(snapshot, 'photo');
+        //this.setState({CameraRoll: saveResult});
         // console.log('whoa dude: ', snapshot);
         this.shareImage(this.snapshot);
       }
@@ -47,7 +53,16 @@ export default class share extends React.Component {
         status = await Permissions.askAsync(Permissions.CAMERA_ROLL).status;
         this.setState({ hasCameraRolePermission: status === 'granted', loading: true });
     }
-
+    onShare = () => {
+        const content = {
+          message: 'https://flic.kr/p/b3Mthp',
+          title: 'tile share',
+          url: 'https://flic.kr/p/b3Mthp',
+        };
+        const option = { dialogTitle: 'title title title' };
+        Share.share(content, option);
+      }
+      
     render() {
         
         return (
@@ -57,6 +72,10 @@ export default class share extends React.Component {
                 title="Deila með öðrum"
                 ref={ref => { this.image = ref; }}
             />
+            /*<Button
+                onPress={() => this.onShare()}
+                title="Share"
+            />*/
         )
     }
 }
