@@ -3,10 +3,14 @@ import { StyleSheet, Text, View, AppRegistry, Button, Platform, Alert} from 'rea
 import Quote from './app/components/Quote';
 import Header from './app/components/Header';
 import Notification from './app/components/Quote';
-import Expo, { Permissions, Notifications, Constants} from 'expo';
+import Expo, { Permissions, Notifications, Constants, Font } from 'expo';
 
 
 class App extends React.Component {
+  state = {
+    fontLoaded: false,
+}
+
 
   localNotification = {
     title: 'Halli segir Hæ',
@@ -28,7 +32,17 @@ class App extends React.Component {
     }
   }
 
+  async componentDidMount() {
+    await Font.loadAsync({
+      'life-bt-italic': require('./assets/fonts/LifeBTItalic.ttf'),
+      'life-bt-roman': require('./assets/fonts/LifeBTRoman.ttf'),
+      'gotham-book': require('./assets/fonts/GothamBookRegular.otf'),
+    });
+    this.setState({ fontLoaded: true });
+  }
+
   componentWillMount() {
+    
     let t = (new Date());
     t.setHours(10);
     t.setMinutes(30);
@@ -46,14 +60,17 @@ class App extends React.Component {
   render() {
     return (
       <View style={{ flex: 1, backgroundColor: '#FDCB6E' }} paddingTop="10%" paddingBottom="5%">
-        <View style={{ flex: 0.5 }}>
+        <View style={{ flex: 0.75 }}>
           <Header/>
         </View>
-        <View style={{ flex: 0.75, backgroundColor: 'pink' }} padding="5%">
-          <Quote/>
-        </View>
-        <View style={{ flex: 0.5 }}>
-          {/* <Quote/> */}
+        {
+          this.state.fontLoaded ?
+          <View style={{ flex: 0.75 }}>
+            <Quote/>
+          </View>
+        : null
+        }
+           <View style={{ flex: 0.5 }}>
         </View>
      </View>
     );

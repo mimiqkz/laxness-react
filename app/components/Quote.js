@@ -1,6 +1,9 @@
 import React from 'react';
 import { StyleSheet, Text, View, NetInfo, Button } from 'react-native';
-import Share from './Share' ;
+import QuoteBox from './QuoteBox';
+import BookBox from './BookBox';
+import DateBox from './DateBox';
+
 
 export default class Quote extends React.Component {
   constructor(){
@@ -53,7 +56,6 @@ export default class Quote extends React.Component {
   componentDidMount() {
     NetInfo.isConnected.fetch()
       .then((isConnected) => {
-      
         if(isConnected) {
           this.getQuote();
         }else {
@@ -81,11 +83,17 @@ export default class Quote extends React.Component {
 
     return (
       <View style={styles.container} >
-        <Text>{chapter}</Text>      
-        <Text>{book}</Text>
-        <Text>{quote}</Text>
-        <Text>{year}</Text>
-        <Share/>
+        <View style={{ width: '100%' }}>
+          <Text style={{ fontFamily: 'gotham-book', marginBottom: '2%' }}>Sunnudagur 6 júní 2018</Text>
+        </View>
+          <QuoteBox quote={quote} />
+          {/* <View style={{ width: '100%', backgroundColor: 'pink'}}>
+            <BookBox book={book} chapter={chapter} />
+          </View>
+
+          <DateBox year={year} /> */}
+
+
       </View>
     )
   }
@@ -95,6 +103,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
+    padding: "5%"
   },
 });

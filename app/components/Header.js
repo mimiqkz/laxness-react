@@ -13,11 +13,8 @@ export default class Header extends React.Component {
         width: undefined,
         height: undefined
       }}
+      margin="10%"
     />
     )
   }
 }
-
-const styles = StyleSheet.create({
- 
-});
