@@ -1,21 +1,28 @@
 import React from 'react';
-import { StyleSheet, Image, Text, View, NetInfo } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 
 export default class DateBox extends React.Component {
     
   render() {
-    const { chapter, book, year } = this.props;    
+    const { year } = this.props;    
 
     return(
-      <View 
-        style={{ 
-            backgroundColor: "#653308", 
-            borderRadius: 5,
-            alignSelf: 'baseline'
-            }} 
-            >
-            <Text style={{ fontFamily: 'life-bt-roman', color: 'white', margin: '3%' }}>{year}</Text> 
-        </View>
+      <View style={styles.container}>
+        <Text style={{  }}>{year}</Text> 
+      </View>
     )
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: "#653308", 
+    borderRadius: 5,
+    alignSelf: 'baseline'
+  },
+  text: {
+    fontFamily: 'life-bt-roman', 
+    color: 'white', 
+    margin: '3%'
+  },
+}); 

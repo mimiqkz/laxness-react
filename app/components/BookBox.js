@@ -7,9 +7,7 @@ export default class BookBox extends React.Component {
   }
 
   getHeight(event) {
-    
     const { x, y, width, height } = event.nativeEvent.layout;   
- 
     this.setState({ boxHeight: height })
   }
 
@@ -31,7 +29,6 @@ export default class BookBox extends React.Component {
         : styles.container;
     
     return(
-      
         <View
           onLayout={this.getHeight.bind(this)} 
           style={baseStyle}>
@@ -45,16 +42,17 @@ export default class BookBox extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    maxWidth: '80%',
+    maxWidth: '90%',
     backgroundColor: '#AE7914',
     borderRadius: 5,
     position: 'absolute',
     bottom: 0,
-    right: '10%',
+    left: '5%'
   },
   text: {
     fontFamily: 'life-bt-italic', 
     color: 'white',
-    padding: '3%'
+    flexWrap: 'wrap',
+    padding: '3%',
   },
 }); 

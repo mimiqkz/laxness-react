@@ -81,9 +81,6 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: '#FDCB6E',
   },
-  c1: {
-    flex: 1
-  }
 })
 
 {/* <color name="yellowPrimary">#FBB818</color>

@@ -37,7 +37,7 @@ export default class Quote extends React.Component {
   getQuote() {
     let errorCode;
     
-    fetch('http://laxnessapi.herokuapp.com/api/3') //change the URL later
+    fetch('http://laxnessapi.herokuapp.com/api/234') //change the URL later
       .then((data) => {
         errorCode = data.status;
         return data.json();
@@ -86,7 +86,8 @@ export default class Quote extends React.Component {
         <Text style={ styles.textDate }>Sunnudagur 6 júní 2018</Text>
         <View style={styles.detailsContainer}>
             <QuoteBox quote={quote} />
-            <BookBox chapter={chapter} book={book} />          
+            <BookBox chapter={chapter} book={book} />     
+            {/* <DateBox year={year} />      */}
         </View>
       </View>
     )

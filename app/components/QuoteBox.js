@@ -38,6 +38,6 @@ const styles = StyleSheet.create({
     marginTop: '5%',
     fontFamily: 'life-bt-roman', 
     fontSize: 18, 
-    textAlign: 'left',
+    textAlign: 'right',
   }
 });
