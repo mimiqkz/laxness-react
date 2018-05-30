@@ -6,18 +6,14 @@ import DateBox from './DateBox';
 
 
 export default class Quote extends React.Component {
-  constructor(){
-    super();
-    NetInfo.addEventListener('connectionChange', this.handleConnectivityChange.bind(this));
-  }
+  
   state = {
-    status: true,
+    status: false,
     data: null,
     loading: true,
     errorMsg: '',
     error: false,
   }
-
   
   convertError(errorCode) {
     const msg = {
@@ -29,15 +25,14 @@ export default class Quote extends React.Component {
     return msg[errorCode];
   }
 
-  handleConnectivityChange() {
-    NetInfo.isConnected.removeEventListener('connectionChange', this.handleConnectivityChange);
-    this.setState({ status: true });
-  }
+  handleConnectivityChange = (status) => {
+    this.setState({ status });
+  };
 
   getQuote() {
     let errorCode;
     
-    fetch('http://laxnessapi.herokuapp.com/api/234') //change the URL later
+    fetch('http://laxnessapi.herokuapp.com/api/today') //change the URL later
       .then((data) => {
         errorCode = data.status;
         return data.json();
@@ -53,24 +48,33 @@ export default class Quote extends React.Component {
 
   }
 
+  componentWillUnmount() {
+    NetInfo.isConnected.removeEventListener(
+      'connectionChange',
+      this.handleConnectivityChange
+    );
+  }
+
   componentDidMount() {
     NetInfo.isConnected.fetch()
       .then((isConnected) => {
         if(isConnected) {
           this.getQuote();
-        }else {
-          this.setState({ status: isConnected });
         }
-      })
-      .catch(err => console.error(err));
-    
+      this.setState({ status: isConnected });
+      }).catch(err => { console.error(err) });
+
+    NetInfo.isConnected.addEventListener(
+      'connectionChange',
+      this.handleConnectivityChange
+    );
   }
 
   render() {
     const { chapter, book, quote, year } = { ...this.state.data };
-    
+  
     if(!this.state.status) {
-      return (<Text>Vinsamlegast athugaðu netsamband</Text>)
+      return ( <Text>Vinsamlegast athugaðu netsamband</Text> )
     }
 
     if (this.state.loading) {

@@ -1,16 +1,15 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, AppRegistry, Button, Platform, Alert} from 'react-native';
 import Quote from './app/components/Quote';
+import Share from './app/components/Share';
 import Header from './app/components/Header';
-import Notification from './app/components/Quote';
 import Expo, { Permissions, Notifications, Constants, Font } from 'expo';
 
 
 class App extends React.Component {
   state = {
     fontLoaded: false,
-}
-
+  }
 
   localNotification = {
     title: 'Halli segir Hæ',
@@ -42,14 +41,14 @@ class App extends React.Component {
   }
 
   componentWillMount() {
+    let t = new Date();
+    t.setHours(33);
     
-    let t = (new Date());
-    t.setHours(10);
-    t.setMinutes(30);
     const schedulingOptions = {
       time: t,
       repeat: 'day',
     };
+
     Notifications.cancelAllScheduledNotificationsAsync();
     Notifications.scheduleLocalNotificationAsync(
       this.localNotification,
@@ -67,6 +66,7 @@ class App extends React.Component {
           this.state.fontLoaded ?
           <View style={{ flex: 0.75 }}>
             <Quote/>
+            <Share/>
           </View>
         : null
         }
