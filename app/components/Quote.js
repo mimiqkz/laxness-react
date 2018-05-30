@@ -37,7 +37,7 @@ export default class Quote extends React.Component {
   getQuote() {
     let errorCode;
     
-    fetch('http://laxnessapi.herokuapp.com/api/today') //change the URL later
+    fetch('http://laxnessapi.herokuapp.com/api/3') //change the URL later
       .then((data) => {
         errorCode = data.status;
         return data.json();
@@ -68,7 +68,7 @@ export default class Quote extends React.Component {
 
   render() {
     const { chapter, book, quote, year } = { ...this.state.data };
-
+    
     if(!this.state.status) {
       return (<Text>Vinsamlegast athugaðu netsamband</Text>)
     }
@@ -83,17 +83,11 @@ export default class Quote extends React.Component {
 
     return (
       <View style={styles.container} >
-        <View style={{ width: '100%' }}>
-          <Text style={{ fontFamily: 'gotham-book', marginBottom: '2%' }}>Sunnudagur 6 júní 2018</Text>
+        <Text style={ styles.textDate }>Sunnudagur 6 júní 2018</Text>
+        <View style={styles.detailsContainer}>
+            <QuoteBox quote={quote} />
+            <BookBox chapter={chapter} book={book} />          
         </View>
-          <QuoteBox quote={quote} />
-          {/* <View style={{ width: '100%', backgroundColor: 'pink'}}>
-            <BookBox book={book} chapter={chapter} />
-          </View>
-
-          <DateBox year={year} /> */}
-
-
       </View>
     )
   }
@@ -104,6 +98,15 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'flex-start',
-    padding: "5%"
+    padding: '5%',
   },
+  detailsContainer: {
+    position: 'relative',
+  },
+  textDate: {
+    width: '100%',
+    marginBottom: '2%',
+    fontFamily: 'gotham-book', 
+    textAlign: 'left'
+  }
 });
