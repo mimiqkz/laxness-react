@@ -1,16 +1,19 @@
 import React from 'react';
 import { Dimensions, Button, Linking, Share, View } from "react-native";
 import { takeSnapshotAsync, FileSystem, Permissions } from 'expo';
+import PropTypes from 'prop-types';
+
 
 
 export default class Sharing extends React.Component {
-  state = {
-    result: null,
-    open: false,
+  static propTypes = {
+    snapshot: PropTypes.base64,
   }
 
-  async shareImage() {
-    const imageURL = this.state.snapshot;
+
+  shareImage = async () => {
+    console.info(this.props)
+    const imageURL = this.props.snapshot;
     console.log(imageURL)
     const response = await fetch('http://laxnessapi.herokuapp.com/api/img/', {
       method: 'POST',
@@ -34,18 +37,8 @@ export default class Sharing extends React.Component {
     Share.share(content, option);
   }
   
-  onShare = () => {
-    const content = {
-      message: 'https://flic.kr/p/b3Mthp',
-      title: 'tile share',
-      url: 'https://flic.kr/p/b3Mthp',
-    };
-    const option = { dialogTitle: 'title title title' };
-    Share.share(content, option);
-  }
-    
   render() {
-      
+    
     return (
 
       <Button

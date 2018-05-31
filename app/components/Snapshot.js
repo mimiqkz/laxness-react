@@ -18,8 +18,7 @@ export default class Snapshot extends React.Component {
         format: 'png',
         quality: 0.9,
         result: 'base64',
-        width: 20,
-        height: 40
+        height: 600
       });
       this.setState({ snapshot })
     } catch(err) { console.error(err) } 
@@ -49,7 +48,7 @@ export default class Snapshot extends React.Component {
           <BookBox chapter={chapter} book={book} />
           {/* <DateBox year={year} />      */}
         </View>
-        <Sharing />
+        <Sharing snapshot={this.state.snapshot}/>
       </View>
     )
   }
