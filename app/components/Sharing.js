@@ -19,7 +19,6 @@ export default class Sharing extends React.Component {
         base64: imageURL,
       })
     })
-    console.log(response);
     const responseJson = await response.json();
 
     const content = {
