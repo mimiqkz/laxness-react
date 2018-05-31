@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, AppRegistry, Button, Platform, Alert} from 'react-native';
 import Quote from './app/components/Quote';
-import Share from './app/components/Share';
 import Header from './app/components/Header';
 import Expo, { Permissions, Notifications, Constants, Font } from 'expo';
 
@@ -66,7 +65,6 @@ class App extends React.Component {
           this.state.fontLoaded ?
           <View style={{ flex: 0.75 }}>
             <Quote/>
-            <Share/>
           </View>
         : null
         }

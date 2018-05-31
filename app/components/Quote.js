@@ -1,8 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View, NetInfo, Button } from 'react-native';
-import QuoteBox from './QuoteBox';
-import BookBox from './BookBox';
-import DateBox from './DateBox';
+import Snapshot from './Snapshot';
 
 
 export default class Quote extends React.Component {
@@ -71,7 +69,6 @@ export default class Quote extends React.Component {
   }
 
   render() {
-    const { chapter, book, quote, year } = { ...this.state.data };
   
     if(!this.state.status) {
       return ( <Text>Vinsamlegast athugaðu netsamband</Text> )
@@ -86,32 +83,7 @@ export default class Quote extends React.Component {
     }
 
     return (
-      <View style={styles.container} >
-        <Text style={ styles.textDate }>Sunnudagur 6 júní 2018</Text>
-        <View style={styles.detailsContainer}>
-            <QuoteBox quote={quote} />
-            <BookBox chapter={chapter} book={book} />     
-            {/* <DateBox year={year} />      */}
-        </View>
-      </View>
+      <Snapshot data={this.state.data}/>
     )
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'flex-start',
-    padding: '5%',
-  },
-  detailsContainer: {
-    position: 'relative',
-  },
-  textDate: {
-    width: '100%',
-    marginBottom: '2%',
-    fontFamily: 'gotham-book', 
-    textAlign: 'left'
-  }
-});

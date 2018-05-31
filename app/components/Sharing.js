@@ -1,14 +1,12 @@
 import React from 'react';
-import { Dimensions, PixelRatio, CameraRoll, Button, Linking, Share, View } from "react-native";
+import { Dimensions, Button, Linking, Share, View } from "react-native";
 import { takeSnapshotAsync, FileSystem, Permissions } from 'expo';
 
 
-export default class share extends React.Component {
+export default class Sharing extends React.Component {
   state = {
     result: null,
-    snapshot: null,
     open: false,
-    hasCameraPermission: null,
   }
 
   async shareImage() {
@@ -35,26 +33,7 @@ export default class share extends React.Component {
     const option = { dialogTitle: 'title title title' };
     Share.share(content, option);
   }
-
-  async capture() {
-    const snapshot = await takeSnapshotAsync(this.image, {
-      format: 'png',
-      quality: 0.9,
-      result: 'base64',
-      width: 20,
-      height: 40
-    });
-    this.setState({snapshot: `data:image/png;base64,${snapshot}`});
-    // console.log('whoa dude: ', snapshot);
-    this.shareImage(this.snapshot);
-    }
-
-  async componentWillMount() {
-    // this.takeScreenShot();
-    const { status } = await Permissions.askAsync(Permissions.CAMERA);
-    this.setState({ hasCameraPermission: status === 'granted', loading: true });
-      
-  }
+  
   onShare = () => {
     const content = {
       message: 'https://flic.kr/p/b3Mthp',
@@ -70,9 +49,8 @@ export default class share extends React.Component {
     return (
 
       <Button
-        onPress={this.capture}
+        onPress={this.shareImage}
         title="Deila með öðrum"
-        ref={ref => { this.image = ref; }}
       />
         
     )
