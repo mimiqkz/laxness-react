@@ -39,34 +39,39 @@ export default class Snapshot extends React.Component {
     const { chapter, book, quote, year } = { ...this.props.data };
 
     return (
-      <View style={styles.container} >
-      <Text style={ styles.textDate }>Sunnudagur 6 júní 2018</Text>
-      <View style={styles.detailsContainer}>
-          <DateBox year={year} />
-        <View style={{ flexDirection: 'row' }}>
-          <QuoteBox quote={quote} />
-        </View>
-          <BookBox chapter={chapter} book={book} />     
-      </View>
-    </View>
-  )
-}
-}
+      <View style={styles.container}>
+          <Text style={styles.textDate}>Sunnudagur 6 júní 2018</Text>
+          <View style={styles.detailsContainer} 
+            collapsable={false} //must have this, else cant capture picture
+            ref={ref => { this.image = ref; }}>
+                <DateBox year={year} />
+                <View style={{ flexDirection: 'row' }}>     
+                  <QuoteBox quote={quote} />
+                </View>
+                <BookBox chapter={chapter} book={book} />
+                
+              </View>
+       {/* <Sharing snapshot={this.state.snapshot}/> */}
+            </View>
+        )
+        }
+       
+       }
 
 const styles = StyleSheet.create({
-container: {
-  flex: 1,
-  alignItems: 'center',
-  justifyContent: 'flex-start',
-  paddingHorizontal: '5%',
-},
-detailsContainer: {
-  position: 'relative',
-},
-textDate: {
-  width: '100%',
-  marginBottom: '2%',
-  fontFamily: 'gotham-book', 
-  textAlign: 'left'
-}
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    paddingHorizontal: '5%',
+  },
+  detailsContainer: {
+    position: 'relative',
+  },
+  textDate: {
+    width: '100%',
+    marginBottom: '2%',
+    fontFamily: 'gotham-book', 
+    textAlign: 'left'
+  }
 });

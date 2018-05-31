@@ -51,6 +51,7 @@ const styles = StyleSheet.create({
   text: {
     fontFamily: 'life-bt-italic', 
     color: 'white',
+    textAlign: 'center',
     padding: '3%',
   },
 }); 

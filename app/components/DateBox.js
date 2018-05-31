@@ -40,7 +40,7 @@ export default class DateBox extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#312321", 
+    backgroundColor: '#653308', 
     borderRadius: 5,
     position: 'absolute',
     zIndex: 100,
@@ -52,8 +52,4 @@ const styles = StyleSheet.create({
     color: 'white', 
     padding: '3%',
   },
-}); 
-
-// <color name="brownPrimary">#B18F4D</color>
-// <color name="brownSecondary">#AE7914</color>
-// <color name="brownTertiary">#653308</color>
+});
