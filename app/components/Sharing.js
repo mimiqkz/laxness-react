@@ -6,15 +6,9 @@ import PropTypes from 'prop-types';
 
 
 export default class Sharing extends React.Component {
-  static propTypes = {
-    snapshot: PropTypes.base64,
-  }
-
 
   shareImage = async () => {
-    console.info(this.props)
     const imageURL = this.props.snapshot;
-    console.log(imageURL)
     const response = await fetch('http://laxnessapi.herokuapp.com/api/img/', {
       method: 'POST',
       headers: {
