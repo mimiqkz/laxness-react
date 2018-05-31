@@ -2,16 +2,13 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, View, AppRegistry, Button, Platform, Alert} from 'react-native';
 import Quote from './app/components/Quote';
 import Header from './app/components/Header';
-import Notification from './app/components/Quote';
-import Share from './app/components/Share';
 import Expo, { Permissions, Notifications, Constants, Font } from 'expo';
 
 
 class App extends React.Component {
   state = {
     fontLoaded: false,
-}
-
+  }
 
   localNotification = {
     title: 'Halli segir Hæ',
@@ -43,14 +40,14 @@ class App extends React.Component {
   }
 
   componentWillMount() {
+    let t = new Date();
+    t.setHours(33);
     
-    let t = (new Date());
-    t.setHours(10);
-    t.setMinutes(30);
     const schedulingOptions = {
       time: t,
       repeat: 'day',
     };
+
     Notifications.cancelAllScheduledNotificationsAsync();
     Notifications.scheduleLocalNotificationAsync(
       this.localNotification,
@@ -83,15 +80,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#FDCB6E',
   },
 })
-
-{/* <color name="yellowPrimary">#FBB818</color>
-    <color name="yellowSecondary">#FDCB6E</color>
-
-    <color name="brownPrimary">#B18F4D</color>
-    <color name="brownSecondary">#AE7914</color>
-    <color name="brownTertiary">#653308</color>
-
-    <color name="alphaBlack">#89000000</color> */}
 
 export default App;
 AppRegistry.registerComponent('Tilvitnun', () => App);
