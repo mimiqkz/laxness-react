@@ -24,8 +24,7 @@ const styles = StyleSheet.create({
     shadowColor: 'black',
     shadowOpacity: 0.5,
     paddingHorizontal: '5%',
-    paddingTop: '5%',
-    paddingBottom: '10%'
+    paddingVertical: '10%',
 
   },
   text: {

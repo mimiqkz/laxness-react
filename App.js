@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, AppRegistry, Button, Platform, Alert} from 'rea
 import Quote from './app/components/Quote';
 import Header from './app/components/Header';
 import Notification from './app/components/Quote';
+import Share from './app/components/Share';
 import Expo, { Permissions, Notifications, Constants, Font } from 'expo';
 
 

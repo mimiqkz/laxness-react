@@ -37,7 +37,7 @@ export default class Quote extends React.Component {
   getQuote() {
     let errorCode;
     
-    fetch('http://laxnessapi.herokuapp.com/api/234') //change the URL later
+    fetch('http://laxnessapi.herokuapp.com/api/120') //change the URL later
       .then((data) => {
         errorCode = data.status;
         return data.json();
@@ -85,9 +85,11 @@ export default class Quote extends React.Component {
       <View style={styles.container} >
         <Text style={ styles.textDate }>Sunnudagur 6 júní 2018</Text>
         <View style={styles.detailsContainer}>
+            <DateBox year={year} />
+          <View style={{ flexDirection: 'row' }}>
             <QuoteBox quote={quote} />
+          </View>
             <BookBox chapter={chapter} book={book} />     
-            {/* <DateBox year={year} />      */}
         </View>
       </View>
     )
@@ -99,7 +101,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'flex-start',
-    padding: '5%',
+    paddingHorizontal: '5%',
   },
   detailsContainer: {
     position: 'relative',

@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Image, Text, View, NetInfo } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 
 export default class BookBox extends React.Component {
   state = {
@@ -42,17 +42,15 @@ export default class BookBox extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    maxWidth: '90%',
     backgroundColor: '#AE7914',
     borderRadius: 5,
     position: 'absolute',
     bottom: 0,
-    left: '5%'
+    marginHorizontal: '5%'
   },
   text: {
     fontFamily: 'life-bt-italic', 
     color: 'white',
-    flexWrap: 'wrap',
     padding: '3%',
   },
 }); 
