@@ -40,6 +40,7 @@ export default class Snapshot extends React.Component {
 
     return (
       <View style={styles.container}>
+        <View style={styles.quote}>
           <Text style={styles.textDate}>Sunnudagur 6 júní 2018</Text>
           <View style={styles.detailsContainer} 
             collapsable={false} //must have this, else cant capture picture
@@ -49,10 +50,10 @@ export default class Snapshot extends React.Component {
                   <QuoteBox quote={quote} />
                 </View>
                 <BookBox chapter={chapter} book={book} />
-                
-              </View>
-       {/* <Sharing snapshot={this.state.snapshot}/> */}
             </View>
+        </View>
+        <Sharing snapshot={this.state.snapshot} />
+      </View>
         )
         }
        
@@ -64,6 +65,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-start',
     paddingHorizontal: '5%',
+  },
+  quote: {
+    marginBottom: '20%',
   },
   detailsContainer: {
     position: 'relative',

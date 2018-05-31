@@ -58,18 +58,16 @@ class App extends React.Component {
   render() {
     return (
       <View style={{ flex: 1, backgroundColor: '#FDCB6E' }} paddingTop="10%" paddingBottom="5%">
-        <View style={{ flex: 0.75 }}>
+        <View style={{ flex: 0.35 }}>
           <Header/>
         </View>
         {
           this.state.fontLoaded ?
-          <View style={{ flex: 0.75 }}>
+          <View style={{ flex: 0.65 }}>
             <Quote/>
           </View>
         : null
         }
-           <View style={{ flex: 0.5 }}>
-        </View>
      </View>
     );
   }
