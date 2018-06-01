@@ -26,11 +26,7 @@ export default class Snapshot extends React.Component {
     } catch(err) { console.error(err) } 
   }
 
-  componentDidUpdate() {
-    if(this.state.hasCameraPermission === 'granted') {
-      this.capture()
-    }
-  }
+
 
   async componentWillMount() {
     try {
@@ -38,6 +34,11 @@ export default class Snapshot extends React.Component {
       this.setState({ hasCameraPermission: status });
     } catch(err) { console.error(err) }
     
+  }
+  componentDidMount(){
+    if(this.state.hasCameraPermission === 'granted') {
+      this.capture()
+    }
   }
 
   render() {
