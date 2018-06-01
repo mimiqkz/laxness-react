@@ -34,7 +34,7 @@ export default class Sharing extends React.Component {
     return (
         <View style={styles.container}> 
             <Text style={ styles.text }>Deildu tilvitnuninni:  </Text>
-            <TouchableHighlight style={{ flex: 1}} onPress={this.shareImage}>
+            <TouchableHighlight underlayColor="rgba(0, 0,0,0)" onPress={this.shareImage}>
               <Image  
                 style={styles.button}
                 source={require('../../assets/sharelogo.png')}
