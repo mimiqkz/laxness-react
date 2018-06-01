@@ -58,12 +58,12 @@ class App extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <View style={{ flex: 0.35 }}>
+        <View style={{ flex: 0.4 }}>
           <Header/>
         </View>
         {
           this.state.fontLoaded ?
-          <View style={{ flex: 0.65 }}>
+          <View style={{ flex: 0.6 }}>
             <Quote/>
           </View>
         : null
@@ -77,8 +77,14 @@ const styles = StyleSheet.create({
   container: {
     flex: 1, 
     backgroundColor: '#FDCB6E',
-    paddingTop: '10%',
-    paddingBottom: '5%',
+    ...Platform.select({
+      ios: {
+        paddingTop: '10%',
+      },
+      android: {
+        paddingTop: '5%'
+      }
+    })
   },
 })
 
