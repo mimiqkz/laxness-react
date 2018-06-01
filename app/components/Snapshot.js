@@ -33,8 +33,10 @@ export default class Snapshot extends React.Component {
   }
 
   async componentWillMount() {
-    const { status } = await Permissions.askAsync(Permissions.CAMERA);
-    this.setState({ hasCameraPermission: status });
+    try {
+      const { status } = await Permissions.askAsync(Permissions.CAMERA);
+      this.setState({ hasCameraPermission: status });
+    } catch(err) { console.error(err) }
     
   }
 

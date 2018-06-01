@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, Dimensions, Button, Linking, Share, View, TouchableHighlight, Image } from "react-native";
 import { takeSnapshotAsync, FileSystem, Permissions } from 'expo';
-import { scaleFontSize, widthPercentageToDP, } from '../utils/Sizing';
+import { scaleFontSize, widthPercentageToDP, heightPercentageToDP, } from '../utils/Sizing';
 
 export default class Sharing extends React.Component {
     shareImage = async () => {
@@ -55,7 +55,6 @@ const styles = StyleSheet.create({
     container: {
         width: '80%', 
         alignItems: 'center',
-        flex: 1,
     },
     text: {
       marginVertical: '3%',
@@ -64,5 +63,6 @@ const styles = StyleSheet.create({
     button: {
       width: widthPercentageToDP(15),
       height: widthPercentageToDP(15),
+      marginBottom: heightPercentageToDP(10),
     }
   });
