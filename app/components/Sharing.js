@@ -18,11 +18,13 @@ export default class Sharing extends React.Component {
         const responseJson = await response.json();
     
         const content = {
-          message: responseJson.link,
-          title: 'tile share',
-          url: responseJson.link,
+          contentType: 'link',
+          message: `https://${responseJson.link}`,
+          title: 'Deildu með öðrum',
+          url:  `https://${responseJson.link}`,
+          subject: 'Share Link'
         };
-        const option = { dialogTitle: 'title title title' };
+        const option = { dialogTitle: 'Deildu með öðrum' };
         Share.share(content, option);
       }
 
