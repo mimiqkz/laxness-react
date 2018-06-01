@@ -35,7 +35,8 @@ export default class Sharing extends React.Component {
             <Text style={ styles.text }>Deildu tilvitnuninni:  </Text>
 
             <View style={ styles.buttonSizing }>
-              <TouchableHighlight style={{ flex: 1}} onPress={this.shareImage}>
+              <TouchableHighlight style={{ flex: 1 }}
+               onPress={this.shareImage}>
                 <Image  
                   style={styles.button}
                   source={require('../../assets/sharelogo.png')}
@@ -67,7 +68,10 @@ const styles = StyleSheet.create({
     },
     buttonSizing: {
       flex: 0.3, 
-      width: '100%'
+      width: '100%',
+      height: '100%',
+      minWidth: '10%',
+      minHeight: '10%'
     },
     button: {
       width: undefined,
