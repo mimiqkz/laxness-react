@@ -40,11 +40,11 @@ export default class Snapshot extends React.Component {
 
     return (
       <View style={styles.container}>
-        <View style={styles.quote}>
-          <Text style={styles.textDate}>Sunnudagur 6 júní 2018</Text>
-          <View style={styles.detailsContainer} 
-            collapsable={false} //must have this, else cant capture picture
+        <View style={styles.quote}
+        collapsable={false} //must have this, else cant capture picture
             ref={ref => { this.image = ref; }}>
+          <Text style={styles.textDate}>Sunnudagur 6 júní 2018</Text>
+          <View style={styles.detailsContainer}>
                 <DateBox year={year} />
                 <View style={{ flexDirection: 'row' }}>     
                   <QuoteBox quote={quote} />
