@@ -33,7 +33,6 @@ export default class Sharing extends React.Component {
     return (
         <View style={styles.container}> 
             <Text style={ styles.text }>Deildu tilvitnuninni:  </Text>
-
             <View style={ styles.buttonSizing }>
               <TouchableHighlight style={{ flex: 1}} onPress={this.shareImage}>
                 <Image  
@@ -42,10 +41,7 @@ export default class Sharing extends React.Component {
                   resizeMode="contain"
                 />
               </TouchableHighlight>
-
             </View>
-            
-            
         </View>
 
         
