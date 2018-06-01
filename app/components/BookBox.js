@@ -33,7 +33,7 @@ export default class BookBox extends React.Component {
           onLayout={this.getHeight.bind(this)} 
           style={baseStyle}>
           <Text style={styles.text}>
-            {chapter + ", " + book}
+            {chapter + " " + book}
           </Text> 
         </View>
     )

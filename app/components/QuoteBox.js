@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, View, Text } from 'react-native';
+import { scaleFontSize } from '../utils/Sizing';
 
 export default class QuoteBox extends React.Component {
     
@@ -25,18 +26,17 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.5,
     paddingHorizontal: '5%',
     paddingVertical: '10%',
-
   },
   text: {
     fontFamily: 'life-bt-italic',
-    fontSize: 18, 
+    fontSize: scaleFontSize(18), 
     lineHeight: 30, 
     textAlign: 'center', 
   },
   textAuthor: {
     marginTop: '5%',
     fontFamily: 'life-bt-roman', 
-    fontSize: 18, 
+    fontSize: scaleFontSize(18), 
     textAlign: 'right',
   }
 });

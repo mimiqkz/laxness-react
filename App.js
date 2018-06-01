@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, AppRegistry, Button, Platform, Alert} from 'react-native';
+import { StyleSheet, ScrollView, PixelRatio, Text, View, AppRegistry, Button, Platform, Alert} from 'react-native';
 import Quote from './app/components/Quote';
 import Header from './app/components/Header';
 import Expo, { Permissions, Notifications, Constants, Font } from 'expo';
-
+import { heightPercentageToDP } from './app/utils/Sizing';
 
 class App extends React.Component {
   state = {
@@ -56,29 +56,28 @@ class App extends React.Component {
   }
   
   render() {
+    
+
+
     return (
-      <View style={styles.container}>
-        <View style={{ flex: 0.35 }}>
+      <ScrollView style={styles.container}>
+        <View style={{ height: heightPercentageToDP(40) }}>
           <Header/>
         </View>
         {
           this.state.fontLoaded ?
-          <View style={{ flex: 0.65 }}>
             <Quote/>
-          </View>
         : null
         }
-     </View>
+     </ScrollView>
     );
   }
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1, 
     backgroundColor: '#FDCB6E',
-    paddingTop: '10%',
-    paddingBottom: '5%',
+    paddingTop: heightPercentageToDP(5),
   },
 })
 

@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, Image, Text, View, NetInfo } from 'react-native';
+import { heightPercentageToDP, } from '../utils/Sizing';
 
 export default class Header extends React.Component {
     
@@ -12,7 +13,7 @@ export default class Header extends React.Component {
         flex: 1, 
         width: undefined,
         height: undefined,
-        margin: '10%'
+        margin: heightPercentageToDP(5),
 
       }}
     />
