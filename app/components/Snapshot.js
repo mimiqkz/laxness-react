@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { takeSnapshotAsync, FileSystem, Permissions } from 'expo';
+import moment from 'moment/min/moment-with-locales';
 import QuoteBox from './QuoteBox';
 import BookBox from './BookBox';
 import DateBox from './DateBox';
@@ -33,17 +34,20 @@ export default class Snapshot extends React.Component {
   async componentWillMount() {
     const { status } = await Permissions.askAsync(Permissions.CAMERA);
     this.setState({ hasCameraPermission: status });
+    
   }
 
   render() {
     const { chapter, book, quote, year } = { ...this.props.data };
-
+    const march = moment()
+    march.locale('is')
+    const date = march.format('dddd do MMMM YYYY')
     return (
       <View style={styles.container}>
         <View style={styles.quote}
         collapsable={false} //must have this, else cant capture picture
             ref={ref => { this.image = ref; }}>
-          <Text style={styles.textDate}>Sunnudagur 6 júní 2018</Text>
+          <Text style={styles.textDate}>{date}</Text>
           <View style={styles.detailsContainer}>
                 <DateBox year={year} />
                 <View style={{ flexDirection: 'row' }}>     
