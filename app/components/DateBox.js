@@ -50,6 +50,6 @@ const styles = StyleSheet.create({
   text: {
     fontFamily: 'life-bt-roman', 
     color: 'white', 
-    padding: '3%',
+    padding: '2%',
   },
 });

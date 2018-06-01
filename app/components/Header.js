@@ -11,9 +11,10 @@ export default class Header extends React.Component {
       style={{ 
         flex: 1, 
         width: undefined,
-        height: undefined
+        height: undefined,
+        margin: '10%'
+
       }}
-      margin="10%"
     />
     )
   }

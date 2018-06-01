@@ -57,7 +57,7 @@ class App extends React.Component {
   
   render() {
     return (
-      <View style={{ flex: 1, backgroundColor: '#FDCB6E' }} paddingTop="10%" paddingBottom="5%">
+      <View style={styles.container}>
         <View style={{ flex: 0.35 }}>
           <Header/>
         </View>
@@ -75,7 +75,10 @@ class App extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1, 
     backgroundColor: '#FDCB6E',
+    paddingTop: '10%',
+    paddingBottom: '5%',
   },
 })
 

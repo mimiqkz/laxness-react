@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, Dimensions, Button, Linking, Share, View } from "react-native";
+import { StyleSheet, Text, Dimensions, Button, Linking, Share, View, TouchableHighlight, Image } from "react-native";
 import { takeSnapshotAsync, FileSystem, Permissions } from 'expo';
 
 export default class Sharing extends React.Component {
@@ -30,11 +30,20 @@ export default class Sharing extends React.Component {
     const { snapshot } = this.props;
     return (
         <View style={styles.container}> 
-            <Text style={ styles.text }>Deildu tilvitnunni á samfélagsmiðlum: </Text>
-            <Button
-                onPress={this.shareImage}
-                title="Deila með öðrum"
-            />
+            <Text style={ styles.text }>Deildu tilvitnuninni:  </Text>
+
+            <View style={ styles.buttonSizing }>
+              <TouchableHighlight style={{ flex: 1}} onPress={this.shareImage}>
+                <Image  
+                  style={styles.button}
+                  source={require('../../assets/sharelogo.png')}
+                  resizeMode="contain"
+                />
+              </TouchableHighlight>
+
+            </View>
+            
+            
         </View>
 
         
@@ -45,12 +54,22 @@ export default class Sharing extends React.Component {
 const styles = StyleSheet.create({
     container: {
         width: '80%', 
-        paddingVertical: '5%',
-        borderTopWidth: 0.2,    
+        borderTopWidth: 0.2,  
+        alignItems: 'center',
+        flex: 1,
+        justifyContent: 'flex-start'
     },
     text: {
-      marginBottom: '2%',
+      marginVertical: '5%',
       fontFamily: 'gotham-book', 
-      textAlign: 'center'
+    },
+    buttonSizing: {
+      flex: 0.3, 
+      width: '100%'
+    },
+    button: {
+      width: undefined,
+      height: undefined,
+      flex: 1
     }
   });
