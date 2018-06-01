@@ -71,6 +71,7 @@ const styles = StyleSheet.create({
   },
   detailsContainer: {
     position: 'relative',
+    marginBottom: '10%'
   },
   textDate: {
     width: '100%',
