@@ -26,9 +26,9 @@ export default class Snapshot extends React.Component {
     } catch(err) { console.error(err) } 
   }
 
-  componentDidUpdate() {
+  componentDidMount() {
     if(this.state.hasCameraPermission === 'granted') {
-      this.capture()
+      this.capture();      
     }
   }
 
@@ -49,30 +49,27 @@ export default class Snapshot extends React.Component {
 
     return (
       <View style={styles.container}>
+        <Text style={styles.textDate}>{date}</Text>
         <View style={styles.quote}
-        collapsable={false} //must have this, else cant capture picture
-            ref={ref => { this.image = ref; }}>
-          <Text style={styles.textDate}>{date}</Text>
+          collapsable={false} //must have this, else cant capture picture
+          ref={ref => { this.image = ref; }}>
           <View style={styles.detailsContainer}>
-                <DateBox year={year} />
-                <View style={{ flexDirection: 'row' }}>     
-                  <QuoteBox quote={quote} />
-                </View>
-                <BookBox chapter={chapter} book={book} />
+            <DateBox year={year} />
+            <View style={{ flexDirection: 'row' }}>     
+              <QuoteBox quote={quote} />
             </View>
+            <BookBox chapter={chapter} book={book} />
+          </View>
         </View>
         <Sharing snapshot={this.state.snapshot} />
       </View>
         )
-        }
-       
-       }
+      }     
+   }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     alignItems: 'center',
-    justifyContent: 'flex-start',
     paddingHorizontal: '5%',
   },
   quote: {

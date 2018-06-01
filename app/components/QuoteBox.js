@@ -3,14 +3,14 @@ import { StyleSheet, View, Text } from 'react-native';
 import { scaleFontSize } from '../utils/Sizing';
 
 export default class QuoteBox extends React.Component {
-    
+  
   render() {
-    const { quote } = this.props;    
+    const { quote, message } = this.props;    
     
     return(
       <View style={styles.container}>        
         <Text style={styles.text}>„{quote}“</Text>
-        <Text style={styles.textAuthor}> - Halldór Laxness </Text>
+        {!message && (<Text style={styles.textAuthor}> - Halldór Laxness </Text>)}
       </View>
     )
   }

@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, NetInfo, Button } from 'react-native';
 import Snapshot from './Snapshot';
-
+import QuoteBox from './QuoteBox';
 
 export default class Quote extends React.Component {
   constructor() {
@@ -69,15 +69,15 @@ export default class Quote extends React.Component {
   render() {
   
     if(!this.state.status) {
-      return ( <Text>Vinsamlegast athugaðu netsamband</Text> )
+      return ( <QuoteBox quote={'Vinsamlegast athugaðu netsamband'} message={true} /> )
     }
 
     if (this.state.loading) {
-      return (<Text>Sæki gögn...</Text>);
+      return (<QuoteBox quote={'Sæki gögn'} message={true} />);
     }
 
     if (this.state.error) {
-      return (<Text>{this.state.errorMsg}</Text>);
+      return (<QuoteBox quote={this.state.errorMsg} message={true} />);
     }
 
     return (
