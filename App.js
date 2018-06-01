@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, AppRegistry, Button, Platform, Alert} from 'react-native';
+import { StyleSheet, PixelRatio, Text, View, AppRegistry, Button, Platform, Alert} from 'react-native';
 import Quote from './app/components/Quote';
 import Header from './app/components/Header';
 import Expo, { Permissions, Notifications, Constants, Font } from 'expo';
-
 
 class App extends React.Component {
   state = {
@@ -56,6 +55,9 @@ class App extends React.Component {
   }
   
   render() {
+    
+
+
     return (
       <View style={styles.container}>
         <View style={{ flex: 0.4 }}>
@@ -75,18 +77,11 @@ class App extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1, 
+    flex: 1,
     backgroundColor: '#FDCB6E',
-    ...Platform.select({
-      ios: {
-        paddingTop: '10%',
-      },
-      android: {
-        paddingTop: '5%'
-      }
-    })
-  },
-})
+    paddingTop: '5%',
+  }
+  })
 
 export default App;
 AppRegistry.registerComponent('Tilvitnun', () => App);

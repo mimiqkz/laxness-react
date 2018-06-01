@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, Dimensions, Button, Linking, Share, View, TouchableHighlight, Image } from "react-native";
 import { takeSnapshotAsync, FileSystem, Permissions } from 'expo';
+import { scaleFontSize, widthPercentageToDP, } from '../utils/Sizing';
 
 export default class Sharing extends React.Component {
     shareImage = async () => {
@@ -33,17 +34,14 @@ export default class Sharing extends React.Component {
     return (
         <View style={styles.container}> 
             <Text style={ styles.text }>Deildu tilvitnuninni:  </Text>
+            <TouchableHighlight style={{ flex: 1}} onPress={this.shareImage}>
+              <Image  
+                style={styles.button}
+                source={require('../../assets/sharelogo.png')}
+                resizeMode="contain"
+              />
+            </TouchableHighlight>
 
-            <View style={ styles.buttonSizing }>
-              <TouchableHighlight style={{ flex: 1}} onPress={this.shareImage}>
-                <Image  
-                  style={styles.button}
-                  source={require('../../assets/sharelogo.png')}
-                  resizeMode="contain"
-                />
-              </TouchableHighlight>
-
-            </View>
             
             
         </View>
@@ -56,22 +54,15 @@ export default class Sharing extends React.Component {
 const styles = StyleSheet.create({
     container: {
         width: '80%', 
-        borderTopWidth: 0.2,  
         alignItems: 'center',
         flex: 1,
-        justifyContent: 'flex-start'
     },
     text: {
-      marginVertical: '5%',
+      marginVertical: '3%',
       fontFamily: 'gotham-book', 
     },
-    buttonSizing: {
-      flex: 0.3, 
-      width: '100%'
-    },
     button: {
-      width: undefined,
-      height: undefined,
-      flex: 1
+      width: widthPercentageToDP(15),
+      height: widthPercentageToDP(15),
     }
   });
