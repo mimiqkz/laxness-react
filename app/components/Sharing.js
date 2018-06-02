@@ -6,23 +6,12 @@ import { scaleFontSize, widthPercentageToDP, heightPercentageToDP, } from '../ut
 export default class Sharing extends React.Component {
     shareImage = async () => {
         const imageURL = this.props.snapshot;
-        const response = await fetch('http://laxnessapi.herokuapp.com/api/img/', {
-          method: 'POST',
-          headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            base64: imageURL,
-          })
-        })
-        const responseJson = await response.json();
-        console.log(responseJson);
+        
         const content = {
           contentType: 'link',
-          message: `https://${responseJson.link}`,
+          message: `this is the qoute of the day`,
           title: 'Deildu með öðrum',
-          url:  `https://${responseJson.link}`,
+          url:  `https://wow.is`,
           subject: 'Share Link'
         };
         const option = { dialogTitle: 'Deildu með öðrum' };
