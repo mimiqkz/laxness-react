@@ -86,6 +86,7 @@ const styles = StyleSheet.create({
   },
   androidDetails: {
     flexDirection: 'row',
+    justifyContent: 'space-between',
   },
   quote: {
     marginBottom: heightPercentageToDP(5),

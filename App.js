@@ -57,8 +57,6 @@ class App extends React.Component {
   
   render() {
     
-
-
     return (
       <ScrollView style={styles.container}>
         <View style={{ height: heightPercentageToDP(40) }}>
