@@ -50,7 +50,8 @@ const styles = StyleSheet.create({
         right: '5%',
       },
       android: {
-
+        marginRight: '5%',
+        justifyContent: 'center'
       }
     })
   },

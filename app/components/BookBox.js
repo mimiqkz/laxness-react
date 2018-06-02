@@ -33,7 +33,7 @@ export default class BookBox extends React.Component {
           onLayout={this.getHeight.bind(this)} 
           style={Platform.OS === 'ios' ? baseStyle : styles.container}>
           <Text style={styles.text}>
-            {chapter + ", " + book}
+            {chapter + ", " + book}{chapter + ", " + book}{chapter + ", " + book}
           </Text> 
         </View>
     )
@@ -52,7 +52,8 @@ const styles = StyleSheet.create({
         marginHorizontal: '5%'
       },
       android: {
-        
+        maxWidth: '70%',
+        marginLeft: '5%',
       }
     }),
   },

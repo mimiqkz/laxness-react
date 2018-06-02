@@ -61,13 +61,6 @@ const styles = StyleSheet.create({
       marginVertical: '3%',
       fontFamily: 'gotham-book', 
     },
-    buttonSizing: {
-      flex: 0.3, 
-      width: '100%',
-      height: '100%',
-      minWidth: '10%',
-      minHeight: '10%'
-    },
     button: {
       width: widthPercentageToDP(15),
       height: widthPercentageToDP(15),
