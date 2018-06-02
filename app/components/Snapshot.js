@@ -14,31 +14,25 @@ export default class Snapshot extends React.Component {
     hasCameraPermission: null,
   }
 
-  async capture() {
-    try {
-      const snapshot = await takeSnapshotAsync(this.image, {
-        format: 'png',
-        quality: 0.9,
-        result: 'base64',
-        height: 600
-      });
-      this.setState({ snapshot })
-    } catch(err) { console.error(err) } 
+  capture = (view) => {    
+   takeSnapshotAsync(view, {
+      format: 'png',
+      quality: 0.9,
+      result: 'base64',
+      height: 600
+    })
+    .then((data) => {
+      this.setState({ snapshot: data })
+    })
+    .catch(err => console.error(err))
+  
   }
 
-
-
-  async componentWillMount() {
+  async componentDidMount() {
     try {
       const { status } = await Permissions.askAsync(Permissions.CAMERA);
       this.setState({ hasCameraPermission: status });
-    } catch(err) { console.error(err) }
-    
-  }
-  componentDidMount(){
-    if(this.state.hasCameraPermission === 'granted') {
-      this.capture()
-    }
+    } catch(err) { console.error(err) }  
   }
 
   render() {
@@ -51,23 +45,27 @@ export default class Snapshot extends React.Component {
     return (
       <View style={styles.container}>
         <View style={styles.quote}
-        collapsable={false} //must have this, else cant capture picture
-            ref={ref => { this.image = ref; }}>
+          collapsable={false} //must have this, else cant capture picture
+          ref={ref => { this.image = ref; }}>
           <Text style={styles.textDate}>{date}</Text>
           <View style={styles.detailsContainer}>
-                <DateBox year={year} />
-                <View style={{ flexDirection: 'row' }}>     
-                  <QuoteBox quote={quote} />
-                </View>
-                <BookBox chapter={chapter} book={book} />
+          <DateBox year={year} />
+            <View style={{ flexDirection: 'row' }}>     
+              <QuoteBox quote={quote} />
             </View>
-        </View>
-        <Sharing snapshot={this.state.snapshot} />
+            <BookBox chapter={chapter} book={book} />
+          </View>
+          </View>
+        {this.state.hasCameraPermission && (
+          <Sharing 
+          capture={this.capture} 
+          view={this.image}
+          snapshot={this.state.snapshot} />
+        )}
       </View>
-        )
-        }
-       
-       }
+    )
+  }
+}
 
 const styles = StyleSheet.create({
   container: {
