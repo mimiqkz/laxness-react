@@ -14,29 +14,25 @@ export default class Snapshot extends React.Component {
     hasCameraPermission: null,
   }
 
-  async capture() {
-    try {
-      const snapshot = await takeSnapshotAsync(this.image, {
-        format: 'png',
-        quality: 0.9,
-        result: 'base64',
-        height: 600
-      });
-      this.setState({ snapshot })
-    } catch(err) { console.error(err) } 
+  capture = (view) => {    
+   takeSnapshotAsync(view, {
+      format: 'png',
+      quality: 0.9,
+      result: 'base64',
+      height: 600
+    })
+    .then((data) => {
+      this.setState({ snapshot: data })
+    })
+    .catch(err => console.error(err))
+  
   }
 
-  async componentWillMount() {
+  async componentDidMount() {
     try {
       const { status } = await Permissions.askAsync(Permissions.CAMERA);
       this.setState({ hasCameraPermission: status });
-    } catch(err) { console.error(err) }
-    
-  }
-  componentDidMount(){
-    if(this.state.hasCameraPermission === 'granted') {
-      this.capture()
-    }
+    } catch(err) { console.error(err) }  
   }
 
   render() {
@@ -71,11 +67,17 @@ export default class Snapshot extends React.Component {
         }
           
         </View>
-        <Sharing snapshot={this.state.snapshot} />
-      </View>
+        {this.state.hasCameraPermission && (
+          <Sharing 
+          capture={this.capture} 
+          view={this.image}
+          snapshot={this.state.snapshot} />
+        )}
+        </View>
         )
       }     
    }
+        
 
 const styles = StyleSheet.create({
   container: {
