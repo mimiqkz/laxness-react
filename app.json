@@ -21,8 +21,12 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true,
-      "bundleIdentifier": "com.gljufrasteinn.ordskaldsins"
+      "supportsTablet": false,
+      "bundleIdentifier": "com.gljufrasteinn.ordskaldsins",
+      "infoPlist": {
+        "NSCameraUsageDescription": "This app uses the camera to take screenshots so that the user can share them on social media.",
+        "remote-notification": "The user will recieve daily notifications"
+      }
     },
     "android": {
       "package": "com.gljufrasteinn.ordskaldsins"
