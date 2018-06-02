@@ -71,16 +71,25 @@ export default class Quote extends React.Component {
     if(!this.state.status) {
       return ( 
         <View style={{ flexDirection: 'row' }}>     
-          <QuoteBox quote={'Vinsamlegast athugaðu netsamband'} isQuote={false} /> 
-        </View>)
+          <QuoteBox quote={'Vinsamlegast athugaðu netsamband'} isWarning={true} /> 
+        </View>
+        )
     }
 
     if (this.state.loading) {
-      return (<QuoteBox quote={'Sæki gögn'} isQuote={false} />);
+      return ( 
+        <View style={{ flexDirection: 'row' }}>     
+          <QuoteBox quote={'Sæki gögn'} isWarning={true} />
+        </View>
+        )
     }
 
     if (this.state.error) {
-      return (<QuoteBox quote={this.state.errorMsg} isQuote={false} />);
+      return ( 
+        <View style={{ flexDirection: 'row' }}>   
+          <QuoteBox quote={this.state.errorMsg} isWarning={true} />
+        </View>
+      )
     }
 
     return (

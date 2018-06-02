@@ -90,7 +90,15 @@ const styles = StyleSheet.create({
     marginTop: heightPercentageToDP(1),
   },
   quote: {
-    marginBottom: heightPercentageToDP(5),
+    ...Platform.select({
+      ios: {
+        marginBottom: heightPercentageToDP(5),
+      },
+      android: {
+        marginBottom: heightPercentageToDP(2),
+      }
+
+    }),
   },
   detailsContainer: {
     position: 'relative',

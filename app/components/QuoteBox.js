@@ -5,12 +5,18 @@ import { scaleFontSize } from '../utils/Sizing';
 export default class QuoteBox extends React.Component {
   
   render() {
-    const { quote, isQuote } = this.props;    
+    const { quote, isWarning } = this.props;    
     
     return(
       <View style={styles.container}>        
-        <Text style={styles.text}>„{quote}“</Text>
-        <Text style={styles.textAuthor}> - Halldór Laxness </Text>
+        
+        {!isWarning ? 
+          <Text style={styles.text}> „{quote}“</Text>
+          :
+          <Text style={styles.text}> {quote}</Text>
+        }
+        
+        {!isWarning && <Text style={styles.textAuthor}> - Halldór Laxness </Text>}
       </View>
     )
   }
