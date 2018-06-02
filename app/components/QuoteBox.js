@@ -1,16 +1,16 @@
 import React from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, Text, Platform } from 'react-native';
 import { scaleFontSize } from '../utils/Sizing';
 
 export default class QuoteBox extends React.Component {
   
   render() {
-    const { quote, message } = this.props;    
+    const { quote, isQuote } = this.props;    
     
     return(
       <View style={styles.container}>        
         <Text style={styles.text}>„{quote}“</Text>
-        {!message && (<Text style={styles.textAuthor}> - Halldór Laxness </Text>)}
+        <Text style={styles.textAuthor}> - Halldór Laxness </Text>
       </View>
     )
   }
@@ -24,8 +24,16 @@ const styles = StyleSheet.create({
     shadowOffset:{  width: -5,  height: 5,  },
     shadowColor: 'black',
     shadowOpacity: 0.5,
-    paddingHorizontal: '5%',
-    paddingVertical: '10%',
+    ...Platform.select({
+      ios: {
+        paddingHorizontal: '5%',
+        paddingVertical: '10%',
+      },
+      android: {
+        padding: '5%',
+        elevation: 1,
+      }
+    })
   },
   text: {
     fontFamily: 'life-bt-italic',

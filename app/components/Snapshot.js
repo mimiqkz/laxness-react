@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Platform, Text, View } from 'react-native';
 import { takeSnapshotAsync, FileSystem, Permissions } from 'expo';
 import moment from 'moment/min/moment-with-locales';
 import QuoteBox from './QuoteBox';
@@ -26,18 +26,17 @@ export default class Snapshot extends React.Component {
     } catch(err) { console.error(err) } 
   }
 
-  componentDidMount() {
-    if(this.state.hasCameraPermission === 'granted') {
-      this.capture();      
-    }
-  }
-
   async componentWillMount() {
     try {
       const { status } = await Permissions.askAsync(Permissions.CAMERA);
       this.setState({ hasCameraPermission: status });
     } catch(err) { console.error(err) }
     
+  }
+  componentDidMount(){
+    if(this.state.hasCameraPermission === 'granted') {
+      this.capture()
+    }
   }
 
   render() {
@@ -53,13 +52,24 @@ export default class Snapshot extends React.Component {
         <View style={styles.quote}
           collapsable={false} //must have this, else cant capture picture
           ref={ref => { this.image = ref; }}>
-          <View style={styles.detailsContainer}>
-            <DateBox year={year} />
+          {Platform.OS === 'ios' ? 
+            <View style={styles.detailsContainer}>
+              <DateBox year={year} />
             <View style={{ flexDirection: 'row' }}>     
               <QuoteBox quote={quote} />
             </View>
             <BookBox chapter={chapter} book={book} />
           </View>
+        :
+        <View style={{  }}>     
+          <QuoteBox quote={quote} />
+          <View style={styles.androidDetails}>
+            <BookBox chapter={chapter} book={book} />
+            <DateBox year={year} />
+          </View>
+        </View>
+        }
+          
         </View>
         <Sharing snapshot={this.state.snapshot} />
       </View>
@@ -71,6 +81,9 @@ const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
     paddingHorizontal: '5%',
+  },
+  androidDetails: {
+    flexDirection: 'row',
   },
   quote: {
     marginBottom: heightPercentageToDP(5),

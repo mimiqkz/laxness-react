@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Platform } from 'react-native';
 
 export default class BookBox extends React.Component {
   state = {
@@ -31,9 +31,9 @@ export default class BookBox extends React.Component {
     return(
         <View
           onLayout={this.getHeight.bind(this)} 
-          style={baseStyle}>
+          style={Platform.OS === 'ios' ? baseStyle : styles.container}>
           <Text style={styles.text}>
-            {chapter + " " + book}
+            {chapter + ", " + book}
           </Text> 
         </View>
     )
@@ -44,10 +44,17 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: '#AE7914',
     borderRadius: 5,
-    position: 'absolute',
-    zIndex: 100,
-    bottom: 0,
-    marginHorizontal: '5%'
+    ...Platform.select({
+      ios: {
+        position: 'absolute',
+        zIndex: 100,
+        bottom: 0,
+        marginHorizontal: '5%'
+      },
+      android: {
+        
+      }
+    }),
   },
   text: {
     fontFamily: 'life-bt-italic', 

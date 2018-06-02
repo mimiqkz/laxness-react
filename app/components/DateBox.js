@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Platform } from 'react-native';
 
 export default class DateBox extends React.Component {
   state = {
@@ -31,7 +31,7 @@ export default class DateBox extends React.Component {
     return(
       <View
       onLayout={this.getHeight.bind(this)} 
-      style={baseStyle}>
+      style={Platform.OS === 'ios' ? baseStyle : styles.container}>
         <Text style={styles.text}>{year}</Text> 
       </View>
     )
@@ -42,10 +42,17 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: '#653308', 
     borderRadius: 5,
-    position: 'absolute',
-    zIndex: 100,
-    top: 0,
-    right: '5%',
+    ...Platform.select({
+      ios: {
+        position: 'absolute',
+        zIndex: 100,
+        top: 0,
+        right: '5%',
+      },
+      android: {
+
+      }
+    })
   },
   text: {
     fontFamily: 'life-bt-roman', 
