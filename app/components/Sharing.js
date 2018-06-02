@@ -5,22 +5,6 @@ import { scaleFontSize, widthPercentageToDP, heightPercentageToDP, } from '../ut
 // import Share from 'react-native-share';
 
 export default class Sharing extends React.Component {
-<<<<<<< HEAD
-    shareImage = async () => {
-        const imageURL = this.props.snapshot;
-        
-        const content = {
-          contentType: 'link',
-          message: `this is the qoute of the day`,
-          title: 'Deildu með öðrum',
-          url:  `https://wow.is`,
-          subject: 'Share Link'
-        };
-        const option = { dialogTitle: 'Deildu með öðrum' };
-        Share.share(content, option);
-      }
-=======
->>>>>>> 0aada84070c5ac0494c86b154acfcb6707df4842
 
   async shareImage(imageURL) {
     const response = await fetch('http://laxnessapi.herokuapp.com/api/img/', {
