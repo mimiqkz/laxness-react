@@ -11,7 +11,7 @@ class App extends React.Component {
   }
 
   localNotification = {
-    title: 'Halli segir Hæ',
+    title: 'Tilvitnun dagsins',
     body: 'Þú hefur fengið nýja tilvitnun',
     android: {
       sound: true,

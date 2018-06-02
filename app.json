@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "laxness-react",
+    "name": "Orð Skáldsins",
     "description": "This project is really great.",
     "slug": "laxness-react",
     "privacy": "public",
@@ -21,7 +21,11 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.gljufrasteinn.ordskaldsisns"
+    },
+    "android": {
+      "package": "com.gljufrasteinn.ordskaldsisns"
     }
   }
 }
