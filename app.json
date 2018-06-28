@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Orð Skáldsins",
-    "description": "Orð Skáldsins: Tilvitnun dagsins eftir Halldór Laxness",
+    "name": "Tilvitnun Dagsins",
+    "description": "Tilvitnun Dagsins: Tilvitnun dagsins eftir Halldór Laxness",
     "slug": "laxness-react",
     "privacy": "public",
     "sdkVersion": "27.0.0",
