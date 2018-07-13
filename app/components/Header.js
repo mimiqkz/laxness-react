@@ -1,22 +1,24 @@
 import React from 'react';
-import { StyleSheet, Image, Text, View, NetInfo } from 'react-native';
-import { heightPercentageToDP, } from '../utils/Sizing';
+import { StyleSheet, Image } from 'react-native';
+import { heightPercentageToDP } from '../utils/Sizing';
 
 export default class Header extends React.Component {
-    
   render() {
-    return(
+    return (
       <Image
-      source={require('../../assets/laxness.png')}
-      resizeMode='contain'
-      style={{ 
-        flex: 1, 
-        width: undefined,
-        height: undefined,
-        margin: heightPercentageToDP(5),
-
-      }}
-    />
-    )
+        source={require('../../assets/laxness.png')}
+        resizeMode="contain"
+        style={styles.image}
+      />
+    );
   }
 }
+
+const styles = StyleSheet.create({
+  image: {
+    flex: 1,
+    width: undefined,
+    height: undefined,
+    margin: heightPercentageToDP(5)
+  }
+});

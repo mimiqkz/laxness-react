@@ -1,38 +1,39 @@
 import React from 'react';
 import { StyleSheet, Platform, Text, View } from 'react-native';
-import { takeSnapshotAsync, FileSystem, Permissions } from 'expo';
+import { takeSnapshotAsync, Permissions } from 'expo';
 import moment from 'moment/min/moment-with-locales';
 import QuoteBox from './QuoteBox';
 import BookBox from './BookBox';
 import DateBox from './DateBox';
 import Sharing from './Sharing';
-import {  widthPercentageToDP, heightPercentageToDP } from '../utils/Sizing';
+import { heightPercentageToDP } from '../utils/Sizing';
 
 export default class Snapshot extends React.Component {
-  state = { 
+  state = {
     snapshot: null,
-    hasCameraPermission: null,
-  }
+    hasCameraPermission: null
+  };
 
-  capture = (view) => {    
-   takeSnapshotAsync(view, {
+  capture = view => {
+    takeSnapshotAsync(view, {
       format: 'png',
       quality: 0.9,
       result: 'base64',
       height: 600
     })
-    .then((data) => {
-      this.setState({ snapshot: data })
-    })
-    .catch(err => console.error(err))
-  
-  }
+      .then(data => {
+        this.setState({ snapshot: data });
+      })
+      .catch(err => console.error(err));
+  };
 
   async componentDidMount() {
     try {
       const { status } = await Permissions.askAsync(Permissions.CAMERA);
       this.setState({ hasCameraPermission: status });
-    } catch(err) { console.error(err) }  
+    } catch (err) {
+      console.error(err);
+    }
   }
 
   render() {
@@ -40,73 +41,75 @@ export default class Snapshot extends React.Component {
     const march = moment();
     march.locale('is');
 
-    const date = march.format('dddd do MMMM YYYY')
+    const date = march.format('dddd do MMMM YYYY');
 
     return (
       <View style={styles.container}>
         <Text style={styles.textDate}>{date}</Text>
-        <View style={styles.quote}
+        <View
+          style={styles.quote}
           collapsable={false} //must have this, else cant capture picture
-          ref={ref => { this.image = ref; }}>
-          {Platform.OS === 'ios' ? 
+          ref={ref => {
+            this.image = ref;
+          }}
+        >
+          {Platform.OS === 'ios' ? (
             <View style={styles.detailsContainer}>
               <DateBox year={year} />
-            <View style={{ flexDirection: 'row' }}>     
-              <QuoteBox quote={quote} />
+              <View style={{ flexDirection: 'row' }}>
+                <QuoteBox quote={quote} />
+              </View>
+              <BookBox chapter={chapter} book={book} />
             </View>
-            <BookBox chapter={chapter} book={book} />
-          </View>
-        :
-        <View style={{  }}>     
-          <QuoteBox quote={quote} />
-          <View style={styles.androidDetails}>
-            <BookBox chapter={chapter} book={book} />
-            <DateBox year={year} />
-          </View>
-        </View>
-        }
-          
+          ) : (
+            <View style={{}}>
+              <QuoteBox quote={quote} />
+              <View style={styles.androidDetails}>
+                <BookBox chapter={chapter} book={book} />
+                <DateBox year={year} />
+              </View>
+            </View>
+          )}
         </View>
         {this.state.hasCameraPermission && (
-          <Sharing 
-          capture={this.capture} 
-          view={this.image}
-          snapshot={this.state.snapshot} />
+          <Sharing
+            capture={this.capture}
+            view={this.image}
+            snapshot={this.state.snapshot}
+          />
         )}
-        </View>
-        )
-      }     
-   }
-        
+      </View>
+    );
+  }
+}
 
 const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
-    paddingHorizontal: '5%',
+    paddingHorizontal: '5%'
   },
   androidDetails: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginTop: heightPercentageToDP(1),
+    marginTop: heightPercentageToDP(1)
   },
   quote: {
     ...Platform.select({
       ios: {
-        marginBottom: heightPercentageToDP(5),
+        marginBottom: heightPercentageToDP(5)
       },
       android: {
-        marginBottom: heightPercentageToDP(2),
+        marginBottom: heightPercentageToDP(2)
       }
-
-    }),
+    })
   },
   detailsContainer: {
-    position: 'relative',
+    position: 'relative'
   },
   textDate: {
     width: '100%',
     marginBottom: '2%',
-    fontFamily: 'gotham-book', 
+    fontFamily: 'gotham-book',
     textAlign: 'left'
   }
 });

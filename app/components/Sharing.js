@@ -1,21 +1,26 @@
 import React from 'react';
-import { StyleSheet, Text, Dimensions, Share, Button, Linking, View, TouchableHighlight, Image } from "react-native";
-import { takeSnapshotAsync, FileSystem, Permissions } from 'expo';
-import { scaleFontSize, widthPercentageToDP, heightPercentageToDP, } from '../utils/Sizing';
+import {
+  StyleSheet,
+  Text,
+  Platform,
+  Share,
+  View,
+  TouchableOpacity
+} from 'react-native';
+import { widthPercentageToDP, heightPercentageToDP } from '../utils/Sizing';
 
 export default class Sharing extends React.Component {
-
   async shareImage(imageURL) {
     const response = await fetch('http://laxnessapi.herokuapp.com/api/img/', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        base64: imageURL,
+        base64: imageURL
       })
-    })
+    });
     const responseJson = await response.json();
     console.log(responseJson);
     const content = {
@@ -30,40 +35,55 @@ export default class Sharing extends React.Component {
   }
 
   componentDidUpdate() {
-    const {snapshot} = this.props;
+    const { snapshot } = this.props;
     this.shareImage(snapshot);
   }
   render() {
-    const { capture, view} = this.props;
+    const { capture, view } = this.props;
 
     return (
-      <View style={styles.container}> 
-        <Text style={ styles.text }>Deildu tilvitnuninni:  </Text>
-        <TouchableHighlight underlayColor="rgba(0, 0,0,0)" onPress={() => capture(view)}>
-          <Image  
-            style={styles.button}
-            source={require('../../assets/sharelogo.png')}
-            resizeMode="contain"x
-          />
-        </TouchableHighlight>
+      <View style={styles.container}>
+        <TouchableOpacity
+          style={styles.shareButton}
+          onPress={() => capture(view)}
+          underlayColor="#fff"
+        >
+          <Text style={styles.text}>Deildu</Text>
+        </TouchableOpacity>
       </View>
-        
-    )
+    );
   }
 }
 
 const styles = StyleSheet.create({
-    container: {
-        width: '80%', 
-        alignItems: 'center',
-    },
-    text: {
-      marginVertical: '3%',
-      fontFamily: 'gotham-book', 
-    },
-    button: {
-      width: widthPercentageToDP(15),
-      height: widthPercentageToDP(15),
-      marginBottom: heightPercentageToDP(10),
-    }
-  });
+  container: {
+    width: '80%',
+    alignItems: 'center'
+  },
+  text: {
+    marginVertical: '3%',
+    fontFamily: 'gotham-book',
+    color: '#fff',
+    textAlign: 'center',
+    fontSize: 18
+  },
+  button: {
+    width: widthPercentageToDP(15),
+    height: widthPercentageToDP(15),
+    marginBottom: heightPercentageToDP(10)
+  },
+  shareButton: {
+    backgroundColor: '#B18F4D',
+    borderRadius: 50,
+    paddingVertical: heightPercentageToDP(1),
+    paddingHorizontal: widthPercentageToDP(5),
+    shadowOffset: { width: 1, height: 2 },
+    shadowColor: 'black',
+    shadowOpacity: 0.5,
+    ...Platform.select({
+      android: {
+        elevation: 1
+      }
+    })
+  }
+});

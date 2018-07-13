@@ -3,40 +3,39 @@ import { StyleSheet, Text, View, Platform } from 'react-native';
 
 export default class BookBox extends React.Component {
   state = {
-    boxHeight: null,
-  }
+    boxHeight: null
+  };
 
   getHeight(event) {
-    const { x, y, width, height } = event.nativeEvent.layout;   
-    this.setState({ boxHeight: height })
+    const { x, y, width, height } = event.nativeEvent.layout;
+    this.setState({ boxHeight: height });
   }
 
   render() {
-    const { chapter, book } = this.props;   
+    const { chapter, book } = this.props;
     const { boxHeight } = this.state;
-     
-    const baseStyle = 
-      boxHeight ? 
-        [styles.container, 
-          { 
+
+    const baseStyle = boxHeight
+      ? [
+          styles.container,
+          {
             transform: [
               {
-                translateY: boxHeight/2,
-              }    
+                translateY: boxHeight / 2
+              }
             ]
           }
         ]
-        : styles.container;
-    
-    return(
-        <View
-          onLayout={this.getHeight.bind(this)} 
-          style={Platform.OS === 'ios' ? baseStyle : styles.container}>
-          <Text style={styles.text}>
-            {chapter + ", " + book}
-          </Text> 
-        </View>
-    )
+      : styles.container;
+
+    return (
+      <View
+        onLayout={this.getHeight.bind(this)}
+        style={Platform.OS === 'ios' ? baseStyle : styles.container}
+      >
+        <Text style={styles.text}>{chapter + ', ' + book}</Text>
+      </View>
+    );
   }
 }
 
@@ -53,14 +52,14 @@ const styles = StyleSheet.create({
       },
       android: {
         maxWidth: '70%',
-        marginLeft: '5%',
+        marginLeft: '5%'
       }
-    }),
+    })
   },
   text: {
-    fontFamily: 'life-bt-italic', 
+    fontFamily: 'life-bt-italic',
     color: 'white',
     textAlign: 'center',
-    padding: '2%',
-  },
-}); 
+    padding: '2%'
+  }
+});
