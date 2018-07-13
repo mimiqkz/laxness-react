@@ -67,11 +67,6 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 18
   },
-  button: {
-    width: widthPercentageToDP(15),
-    height: widthPercentageToDP(15),
-    marginBottom: heightPercentageToDP(10)
-  },
   shareButton: {
     backgroundColor: '#B18F4D',
     borderRadius: 50,
