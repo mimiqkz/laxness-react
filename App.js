@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
-import { StyleSheet, ScrollView, PixelRatio, Text, View, AppRegistry, Button, Platform, Alert} from 'react-native';
+import React from 'react';
+import { StyleSheet, ScrollView, View, AppRegistry, } from 'react-native';
 import Quote from './app/components/Quote';
 import Header from './app/components/Header';
-import Expo, { Permissions, Notifications, Constants, Font } from 'expo';
+import { Permissions, Notifications, Font } from 'expo';
 import { heightPercentageToDP } from './app/utils/Sizing';
 
 class App extends React.Component {
@@ -42,7 +42,7 @@ class App extends React.Component {
   componentWillMount() {
     let t = new Date();
     t.setHours(33);
-    
+
     const schedulingOptions = {
       time: t,
       repeat: 'day',
@@ -54,20 +54,20 @@ class App extends React.Component {
       schedulingOptions
     );
   }
-  
+
   render() {
-    
+
     return (
       <ScrollView style={styles.container}>
         <View style={{ height: heightPercentageToDP(40) }}>
-          <Header/>
+          <Header />
         </View>
         {
           this.state.fontLoaded ?
-            <Quote/>
-        : null
+            <Quote />
+            : null
         }
-     </ScrollView>
+      </ScrollView>
     );
   }
 }

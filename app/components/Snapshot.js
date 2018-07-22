@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, Platform, Text, View } from 'react-native';
 import { takeSnapshotAsync, Permissions } from 'expo';
-import moment from 'moment/min/moment-with-locales';
+import Date from './Date';
 import QuoteBox from './QuoteBox';
 import BookBox from './BookBox';
 import DateBox from './DateBox';
@@ -38,14 +38,11 @@ export default class Snapshot extends React.Component {
 
   render() {
     const { chapter, book, quote, year } = { ...this.props.data };
-    const march = moment();
-    march.locale('is');
 
-    const date = march.format('dddd do MMMM YYYY');
 
     return (
       <View style={styles.container}>
-        <Text style={styles.textDate}>{date}</Text>
+        <Date />
         <View
           style={styles.quote}
           collapsable={false} //must have this, else cant capture picture
@@ -62,14 +59,14 @@ export default class Snapshot extends React.Component {
               <BookBox chapter={chapter} book={book} />
             </View>
           ) : (
-            <View style={{}}>
-              <QuoteBox quote={quote} />
-              <View style={styles.androidDetails}>
-                <BookBox chapter={chapter} book={book} />
-                <DateBox year={year} />
+              <View style={{}}>
+                <QuoteBox quote={quote} />
+                <View style={styles.androidDetails}>
+                  <BookBox chapter={chapter} book={book} />
+                  <DateBox year={year} />
+                </View>
               </View>
-            </View>
-          )}
+            )}
         </View>
         {this.state.hasCameraPermission && (
           <Sharing
@@ -105,11 +102,5 @@ const styles = StyleSheet.create({
   },
   detailsContainer: {
     position: 'relative'
-  },
-  textDate: {
-    width: '100%',
-    marginBottom: '2%',
-    fontFamily: 'gotham-book',
-    textAlign: 'left'
   }
 });
