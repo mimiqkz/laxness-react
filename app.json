@@ -30,7 +30,7 @@
     },
     "android": {
       "package": "com.gljufrasteinn.ordskaldsins",
-      "versionCode": "2"
+      "versionCode": 2
     }
   }
 }
