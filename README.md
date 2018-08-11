@@ -8,7 +8,7 @@
 The UI of the application is designed with the inspiration of the *Gljúfrasteinn* website, while incorporating Android UI design principles.
  
  <p align="center">
-  <img width="30%" alt="capture" src="https://user-images.githubusercontent.com/19761446/43996143-f5a5e97e-9dab-11e8-8dfa-d779291d2ce0.png">
+  <img width="100%" alt="capture" src="https://user-images.githubusercontent.com/19761446/43996143-f5a5e97e-9dab-11e8-8dfa-d779291d2ce0.png">
  </p>
   
  ## Team roles
