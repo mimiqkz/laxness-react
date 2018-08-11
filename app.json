@@ -29,7 +29,8 @@
       }
     },
     "android": {
-      "package": "com.gljufrasteinn.ordskaldsins"
+      "package": "com.gljufrasteinn.ordskaldsins",
+      "versionCode": "2"
     }
   }
 }
